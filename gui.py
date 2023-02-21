@@ -23,36 +23,38 @@ window = sg.Window("Calculator", layout=[[col1, col2],
                                          [output_label]])
 
 while True:
+
     event, values = window.read()
     print(event)
     print(values)
-    match event:
-        case "add":
-            first_number = int(values['first_number'])
-            second_number = int(values['second_number'])
-            result = calculator.addition(first_number, second_number)
-            window['output'].update(value=result)
 
-        case "sub":
-            first_number = int(values['first_number'])
-            second_number = int(values['second_number'])
-            result = calculator.subtraction(first_number, second_number)
-            window['output'].update(value=result)
+    try:
+        first_number = int(values['first_number'])
+        second_number = int(values['second_number'])
+        match event:
 
-        case "mul":
-            first_number = int(values['first_number'])
-            second_number = int(values['second_number'])
-            result = calculator.multiplication(first_number, second_number)
-            window['output'].update(value=result)
+            case "add":
+                result = calculator.addition(first_number, second_number)
+                window['output'].update(value=result)
 
-        case "div":
-            first_number = int(values['first_number'])
-            second_number = int(values['second_number'])
-            result = calculator.division(first_number, second_number)
-            window['output'].update(value=result)
+            case "sub":
+                result = calculator.subtraction(first_number, second_number)
+                window['output'].update(value=result)
 
-        case sg.WIN_CLOSED:
-            break
+            case "mul":
+                result = calculator.multiplication(first_number, second_number)
+                window['output'].update(value=result)
+
+            case "div":
+                result = calculator.division(first_number, second_number)
+                window['output'].update(value=result)
+
+            case sg.WIN_CLOSED:
+                break
+    except ValueError:
+        sg.popup("Provide two numbers first.")
+    except TypeError:
+        break
 
 window.close()
 
