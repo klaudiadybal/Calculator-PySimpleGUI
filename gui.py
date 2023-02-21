@@ -52,7 +52,7 @@ while True:
             case sg.WIN_CLOSED:
                 break
     except ValueError:
-        sg.popup("Provide two numbers first.")
+        sg.popup("Provide two numbers.")
     except TypeError:
         break
 
